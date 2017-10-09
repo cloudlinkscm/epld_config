@@ -1,0 +1,13 @@
+server:
+  port: 8086
+eureka:
+  instance:
+    hostname: 10.10.10.76
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+management:
+  security:
+    enabled: false
+
