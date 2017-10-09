@@ -1,0 +1,59 @@
+server:
+  port: 8087
+  #context-path: /archiver_service
+spring:
+  application:
+    name: archiver_service
+  datasource:
+    url: jdbc:mysql://10.0.20.128:3306/archiver?useSSL=false&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    database: 0
+    host: 10.0.20.128
+    port: 6379
+    password: 123456
+    pool:
+      max-active: -1
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.cloudlinkscm.loms.service.archiver.domain
+  type-handlers-package: com.cloudlinkscm.loms.service.archiver.dao
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+    database-id: test
+eureka:
+  instance:
+    hostname: 10.0.20.128
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+management:
+  security:
+    enabled: false
+
+gateway-config:
+  gateway: http://10.0.20.128:5555
+
+
+
+
+
+
+
+
+
+
+
+
+
