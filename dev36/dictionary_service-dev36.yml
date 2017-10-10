@@ -1,0 +1,40 @@
+server:
+  port: 8010
+#  context-path: /dictionary_service
+
+spring:
+  application:
+    name: dictionary_service
+  datasource:
+    url: jdbc:mysql://10.10.10.37:3306/archiver?useSSL=false&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  mapper-locations: classpath*:mybatis/mapper/*Mapper.xml
+  type-aliases-package:
+  type-handlers-package:
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+
+eureka:
+  instance:
+    hostname: 10.10.10.36
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    enabled: true
+management:
+  security:
+    enabled: false
+
+gateway-config:
+  gateway: http://10.10.10.36:5555
+
+hercules:
+  debug: false
+  dateFormatPattern: yyyy-MM-dd HH:mm:ss

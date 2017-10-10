@@ -1,0 +1,42 @@
+server:
+  port: 8086
+#  context-path: /supplier_service
+spring:
+  application:
+    name: supplier_service
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://10.0.20.128:3306/archiver?useSSL=false&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.cloudlinkscm.loms.service.supplier.domain.entity
+  type-handlers-package: com.cloudlinkscm.loms.service.supplier.dao
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+    database-id: test
+eureka:
+  instance:
+    hostname: 10.0.20.128
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    enabled: true
+management:
+  security:
+    enabled: false
+
+hercules:
+  debug: false
+  dateFormatPattern: yyyy-MM-dd HH:mm:ss
+
+#远程调用服务host
+trace:
+  gateway: http://10.0.20.128:5555

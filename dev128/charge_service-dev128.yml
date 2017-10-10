@@ -1,0 +1,40 @@
+server:
+  port: 8088
+#  context-path: /charge_service
+spring:
+  application:
+    name: charge_service
+  datasource:
+    url: jdbc:mysql://10.0.20.128:3306/charge?useSSL=false&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  mapper-locations: classpath*:mybatis/mapper/*Mapper.xml
+  type-aliases-package: com.cloudlinkscm.loms.service.charge.model.pojo
+  type-handlers-package: com.cloudlinkscm.loms.service.charge.model.daoMapper
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+    database-id: test
+eureka:
+  instance:
+    hostname: 10.0.20.128
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+management:
+  security:
+    enabled: false
+
+#远程调用服务host
+trace:
+  gateway: http://10.0.20.128:5555
+
+hercules:
+  debug: false
+  dateFormatPattern: yyyy-MM-dd HH:mm:ss

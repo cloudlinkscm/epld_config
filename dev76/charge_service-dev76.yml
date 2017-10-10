@@ -1,20 +1,20 @@
 server:
-  port: 8084
-  #context-path: /customer_service
+  port: 8088
+#  context-path: /charge_service
 spring:
   application:
-    name: customer_service
+    name: charge_service
   datasource:
-    url: jdbc:mysql://10.10.10.77:3306/archiver?useSSL=false&characterEncoding=utf-8
+    url: jdbc:mysql://10.10.10.77:3306/charge?useSSL=false&characterEncoding=utf-8
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
 
 mybatis:
-  mapper-locations: classpath*:mapper/*.xml
-  type-aliases-package: com.cloudlinkscm.loms.service.customer.domain.entity
-  type-handlers-package: com.cloudlinkscm.loms.service.customer.dao
+  mapper-locations: classpath*:mybatis/mapper/*Mapper.xml
+  type-aliases-package: com.cloudlinkscm.loms.service.charge.model.pojo
+  type-handlers-package: com.cloudlinkscm.loms.service.charge.model.daoMapper
   configuration:
     map-underscore-to-camel-case: true
     default-fetch-size: 100
@@ -30,17 +30,11 @@ eureka:
 management:
   security:
     enabled: false
-feign:
-  hystrix:
-    enabled: true
 
-gateway-config:
-   gateway: http://10.10.10.76:5555
-
+#远程调用服务host
+trace:
+  gateway: http://10.10.10.76:5555
 
 hercules:
   debug: false
   dateFormatPattern: yyyy-MM-dd HH:mm:ss
-
-
-

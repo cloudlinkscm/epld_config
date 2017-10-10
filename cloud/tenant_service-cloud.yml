@@ -1,0 +1,40 @@
+server:
+  port: 8083
+#  context-path: /tenant_service
+spring:
+  application:
+    name: tenant_service
+  datasource:
+    url: jdbc:mysql://rm-wz9rv866w3rm95215.mysql.rds.aliyuncs.com:3306/auth?useSSL=false&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 2017_epld
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  mapper-locations: classpath*:mybatis/*_mapper.xml
+  type-aliases-package: com.cloudlinkscm.loms.services.tenant.entity
+  type-handlers-package: com.cloudlinkscm.loms.services.tenant.mapper
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+    database-id: test
+eureka:
+  instance:
+    hostname: 10.10.20.56
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+management:
+  security:
+    enabled: false
+feign:
+  hystrix:
+    enabled: true
+    
+
+hercules:
+  debug: false
+  dateFormatPattern: yyyy-MM-dd HH:mm:ss
